@@ -32,3 +32,14 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+
+
+
+
+# AWS
+
+VPC -- rede privada
+subnet -- 
+ACL -- firewall para a VPC
+security group -- firewall para a instância
