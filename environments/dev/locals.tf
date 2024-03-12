@@ -37,7 +37,7 @@ locals {
     cluster_endpoint_public_access = true
     cluster_enabled_log_types      = ["audit", "api", "authenticator", "controllerManager", "scheduler"]
   }
-
+  /*
   eks_managed_node_group_params = {
     default_group = {
       min_size       = 1
@@ -68,4 +68,5 @@ locals {
       groups   = ["system:masters"]
     }
   ]
+ */
 }

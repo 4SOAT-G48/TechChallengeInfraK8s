@@ -17,7 +17,7 @@ variable "cluster_enabled_log_types" {
   description = "description"
 }
 
-
+/*
 variable "min_size" {
   type        = number
   description = ""
@@ -52,6 +52,7 @@ variable "max_unavailable_percentage" {
   type        = number
   description = ""
 }
+*/
 
 variable "vpc_id" {}
 
@@ -66,6 +67,7 @@ variable "control_plane_subnet_ids" {
   type        = list(string)
 }
 
+/*
 variable "eks_aws_auth_users" {
   description = "IAM Users to be added to the aws-auth ConfigMap, one item in the set() per each IAM User"
   type = set(object({
@@ -73,4 +75,4 @@ variable "eks_aws_auth_users" {
     username = string
     groups   = list(string)
   }))
-}
+}*/
