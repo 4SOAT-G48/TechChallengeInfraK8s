@@ -11,7 +11,7 @@ locals {
   environment  = "dev"
   owners       = "4soat-g48"
   project_name = "4soat-g48-tc"
-  eks_version  = "1.27"
+  eks_version  = "1.29"
   component    = "devops"
   env_name     = "${local.project_name}-${local.environment}"
 
@@ -40,9 +40,9 @@ locals {
 
   eks_managed_node_group_params = {
     default_group = {
-      min_size       = 2
+      min_size       = 1
       max_size       = 6
-      desired_size   = 2
+      desired_size   = 1
       instance_types = ["t3.micro"]
       capacity_type  = "ON_DEMAND"
       taints = [

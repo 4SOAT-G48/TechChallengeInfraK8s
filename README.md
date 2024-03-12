@@ -61,7 +61,7 @@ Repositório para infra Kubernetes com Terraform para o TechChallenge da Fiap Tu
 
 1. Via terminal entre na pasta do ambiente que deve ser executada;
 1. Execute o comando de inicialização
-    ``` sh
+    ``` shell
     terraform init
     ```
 1. Execute o planejamento
@@ -72,3 +72,10 @@ Repositório para infra Kubernetes com Terraform para o TechChallenge da Fiap Tu
     ```
     terraform apply "plan.out"
     ```
+
+
+``` shell
+aws --profile 4soat_g48 --region us-east-1 eks update-kubeconfig --name 4soat-g48-tc-dev-cluster --alias 4soat-g48-tc-dev-cluster-4soat_g48-profile
+```
+
+kubectl auth can-i get pod

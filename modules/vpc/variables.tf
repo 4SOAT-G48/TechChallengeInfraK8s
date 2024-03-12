@@ -46,6 +46,11 @@ variable "intra_subnets" {
   type        = list(string)
 }
 
+variable "database_subnets" {
+  description = "Lista de subnets para databases dentro da VPC"
+  type        = list(string)
+}
+
 # VPC Enable NAT Gateway (True or False) 
 variable "enable_nat_gateway" {
   description = "Should be true if you want to provision NAT Gateways for each of your private networks"

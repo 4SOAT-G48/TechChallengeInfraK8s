@@ -18,7 +18,6 @@ output "vpc_intra_subnets" {
   value = [module.subnet_addrs.network_cidr_blocks["intra-1"], module.subnet_addrs.network_cidr_blocks["intra-2"]]
 }
 
-/*
 output "eks_cloudwatch_log_group_arn" {
   value = module.eks.cloudwatch_log_group_arn
 }
@@ -46,4 +45,7 @@ output "eks_oidc_provider" {
 output "eks_oidc_provider_arn" {
   value = module.eks.oidc_provider_arn
 }
-*/
+
+output "eks_masters_access_role" {
+  value = module.eks.eks_masters_access_role
+}

@@ -14,9 +14,14 @@ module "vpc" {
   public_subnets  = var.public_subnets
   private_subnets = var.private_subnets
   intra_subnets   = var.intra_subnets
+#  database_subnets = var.database_subnets
+
 
   enable_nat_gateway = var.enable_nat_gateway
-  enable_vpn_gateway = var.enable_vpn_gateway
+#  enable_vpn_gateway = var.enable_vpn_gateway
+#  single_nat_gateway      = true
+#  enable_dns_hostnames    = true
+  map_public_ip_on_launch = true
 
   enable_flow_log = var.enable_flow_log
 }
@@ -48,7 +53,7 @@ module "endpoints" {
       service_type    = "Gateway"
       route_table_ids = flatten([module.vpc.intra_route_table_ids, module.vpc.private_route_table_ids, module.vpc.public_route_table_ids])
       tags = { Name = "${local.env_name}-vpc-ddb-ep" }
-    }
+    },
     s3 = {
       service         = "s3"
       service_type    = "Gateway"
@@ -73,5 +78,12 @@ module "endpoints" {
       subnet_ids          = module.vpc.private_subnets
       tags = { Name = "${local.env_name}-vpc-ecr-dkr-ep" }
     }
+    # ,
+    # rds = {
+    #   service             = "rds"
+    #   private_dns_enabled = true
+    #   subnet_ids          = module.vpc.private_subnets
+    #   tags = { Name = "${local.env_name}-vpc-rds-ep" }
+    # }
   }
 }

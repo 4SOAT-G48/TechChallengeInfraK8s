@@ -1,5 +1,4 @@
 
-
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -34,6 +33,14 @@ module "subnet_addrs" {
       name     = "intra-2"
       new_bits = 8
     },
+    {
+      name     = "database-1"
+      new_bits = 8
+    },
+    {
+      name     = "database-2"
+      new_bits = 8
+    },
   ]
 }
 
@@ -51,6 +58,7 @@ module "vpc" {
   public_subnets  = [module.subnet_addrs.network_cidr_blocks["public-1"], module.subnet_addrs.network_cidr_blocks["public-2"]]
   private_subnets = [module.subnet_addrs.network_cidr_blocks["private-1"], module.subnet_addrs.network_cidr_blocks["private-2"]]
   intra_subnets   = [module.subnet_addrs.network_cidr_blocks["intra-1"], module.subnet_addrs.network_cidr_blocks["intra-2"]]
+  database_subnets   = [module.subnet_addrs.network_cidr_blocks["database-1"], module.subnet_addrs.network_cidr_blocks["database-2"]]
 
   enable_nat_gateway = local.vpc_params.enable_nat_gateway
   enable_vpn_gateway = local.vpc_params.enable_vpn_gateway
@@ -58,7 +66,7 @@ module "vpc" {
   enable_flow_log = local.vpc_params.enable_flow_log
 }
 
-/*
+
 module "eks" {
   source = "../../modules/eks"
 
@@ -82,4 +90,3 @@ module "eks" {
 
   eks_aws_auth_users = local.eks_aws_auth_users
 }
-*/
