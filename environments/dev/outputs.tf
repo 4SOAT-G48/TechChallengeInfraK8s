@@ -22,6 +22,10 @@ output "vpc_infos" {
   value = module.vpc
 }
 
-output "eks_infos" {
-  value = module.eks
+output "ecs" {
+  value = module.ecs
+}
+
+output "ecr" {
+  value = module.ecr
 }

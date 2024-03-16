@@ -44,6 +44,7 @@ module "subnet_addrs" {
   ]
 }
 
+
 module "vpc" {
   source = "../../modules/vpc"
 
@@ -66,27 +67,24 @@ module "vpc" {
   enable_flow_log = local.vpc_params.enable_flow_log
 }
 
+module "ecr" {
+  source = "../../modules/aws_ecr"
 
-module "eks" {
-  source = "../../modules/aws_fargate"
+  container_image = local.container_images
+}
 
-  env_name    = local.env_name
-  eks_version = local.eks_version
+module "ecs" {
+  source = "../../modules/ecs"
 
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
-  control_plane_subnet_ids = module.vpc.intra_subnets
+  env_name       = local.env_name
+  subnet_ids     = module.vpc.private_subnets
+  public_subnets = module.vpc.public_subnets
+  vpc_id         = module.vpc.vpc_id
 
-  cluster_endpoint_public_access = local.eks_params.cluster_endpoint_public_access
-  cluster_enabled_log_types      = local.eks_params.cluster_enabled_log_types
 
-  #  min_size                   = local.eks_managed_node_group_params.default_group.min_size
-  #  max_size                   = local.eks_managed_node_group_params.default_group.max_size
-  #  desired_size               = local.eks_managed_node_group_params.default_group.desired_size
-  #  instance_types             = local.eks_managed_node_group_params.default_group.instance_types
-  #  capacity_type              = local.eks_managed_node_group_params.default_group.capacity_type
-  #  taints                     = local.eks_managed_node_group_params.default_group.taints
-  #  max_unavailable_percentage = local.eks_managed_node_group_params.default_group.max_unavailable_percentage
-  #
-  #  eks_aws_auth_users = local.eks_aws_auth_users
+  container_port   = local.ecs_params.container_port
+  cpu              = local.ecs_params.cpu
+  desired_capacity = local.ecs_params.desired_capacity
+  memory           = local.ecs_params.memory
+  image_url        = module.ecr.ecr_repository_url
 }

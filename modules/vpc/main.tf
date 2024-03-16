@@ -16,7 +16,7 @@ module "vpc" {
   intra_subnets   = var.intra_subnets
 #  database_subnets = var.database_subnets
 
-
+  create_igw = true
   enable_nat_gateway = var.enable_nat_gateway
 #  enable_vpn_gateway = var.enable_vpn_gateway
 #  single_nat_gateway      = true

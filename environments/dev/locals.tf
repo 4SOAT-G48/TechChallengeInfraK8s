@@ -1,7 +1,6 @@
 locals {
   #informações vinculadas a conta
-  //aws_account_id = 654654385771 #labs
-  aws_account_id = 471114860739
+  aws_account_id = 1234567890
   region         = "us-east-1"
   profile        = "4soat_g48"
   role_tf        = "tf-admin"
@@ -32,41 +31,14 @@ locals {
     enable_flow_log        = false
   }
 
-  # configuração EKS
-  eks_params = {
-    cluster_endpoint_public_access = true
-    cluster_enabled_log_types      = ["audit", "api", "authenticator", "controllerManager", "scheduler"]
-  }
-  /*
-  eks_managed_node_group_params = {
-    default_group = {
-      min_size       = 1
-      max_size       = 6
-      desired_size   = 1
-      instance_types = ["t3.micro"]
-      capacity_type  = "ON_DEMAND"
-      taints = [
-        {
-          key    = "CriticalAddonsOnly"
-          value  = "true"
-          effect = "NO_SCHEDULE"
-        },
-        {
-          key    = "CriticalAddonsOnly"
-          value  = "true"
-          effect = "NO_EXECUTE"
-        }
-      ]
-      max_unavailable_percentage = 50
-    }
-  }
+  # nome da imagem do container
+  container_images = local.project_name
 
-  eks_aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::${local.aws_account_id}:user/arseny"
-      username = "arseny"
-      groups   = ["system:masters"]
-    }
-  ]
- */
+  # configuração do ECR
+  ecs_params = {
+    container_port   = "8081"
+    memory           = "512"
+    cpu              = "256"
+    desired_capacity = 3
+  }
 }
