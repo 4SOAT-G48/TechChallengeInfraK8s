@@ -18,6 +18,10 @@ output "vpc_intra_subnets" {
   value = [module.subnet_addrs.network_cidr_blocks["intra-1"], module.subnet_addrs.network_cidr_blocks["intra-2"]]
 }
 
+output "vpc_database_subnets" {
+  value = [module.subnet_addrs.network_cidr_blocks["database-1"], module.subnet_addrs.network_cidr_blocks["database-2"]]
+}
+
 output "vpc_infos" {
   value = module.vpc
 }

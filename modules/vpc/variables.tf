@@ -29,6 +29,12 @@ variable "availability_zones" {
   #default     = ["a", "b"]
 }
 
+#variable "region" {
+#  description = "Região da VPC"
+#  type        = string
+#  #default     = "us-east-1"
+#}
+
 variable "public_subnets" {
   description = "Lista de subnets publicas dentro da VPC"
   type        = list(string)
@@ -69,45 +75,5 @@ variable "enable_flow_log" {
   type        = bool
   default     = false
 }
-
-
-
-
-# # VPC Single NAT Gateway (True or False)
-# variable "single_nat_gateway" {
-#   description = "Should be true if you want to provision a single shared NAT Gateway across all of your private networks"
-#   type        = bool
-#   default     = true
-# }
-
-
-
-# variable "public_subnets_cidr" {
-#   description = "CIDR blocks for the public subnets"
-#   type        = list(string)
-# }
-
-# # Environment Variable
-
-# # VPC Database Subnets
-# variable "database_subnets" {
-#   description = "A list of database subnets inside the VPC"
-#   type        = list(string)
-#   default     = ["10.0.151.0/24", "10.0.152.0/24"]
-# }
-
-# # VPC Create Database Subnet Group (True / False)
-# variable "create_database_subnet_group" {
-#   description = "VPC Create Database Subnet Group, Controls if database subnet group should be created"
-#   type        = bool
-#   default     = true
-# }
-
-# # VPC Create Database Subnet Route Table (True or False)
-# variable "create_database_subnet_route_table" {
-#   description = "VPC Create Database Subnet Route Table, Controls if separate route table for database should be created"
-#   type        = bool
-#   default     = true
-# }
 
 

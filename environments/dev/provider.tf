@@ -6,11 +6,4 @@ provider "aws" {
   default_tags {
     tags = local.aws_default_tags
   }
-
-  dynamic "assume_role" {
-    for_each = local.has_role_tf ? [1] : []
-    content {
-      role_arn = "arn:aws:iam::${local.aws_account_id}:role/${local.role_tf}"
-    }
-  }
 }

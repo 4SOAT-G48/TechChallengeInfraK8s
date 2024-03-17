@@ -1,15 +1,8 @@
 locals {
-  #informações vinculadas a conta
-  aws_account_id = 1234567890
-  region         = "us-east-1"
-  profile        = "4soat_g48"
-  role_tf        = "tf-admin"
-  has_role_tf    = false
-
   #configuração do ambiente
   environment  = "dev"
-  owners       = "4soat-g48"
-  project_name = "4soat-g48-tc"
+  owners       = "fiap-4soat-g48"
+  project_name = "fiap-4soat-g48-tc"
   eks_version  = "1.29"
   component    = "devops"
   env_name     = "${local.project_name}-${local.environment}"

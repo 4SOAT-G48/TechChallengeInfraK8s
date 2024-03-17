@@ -54,6 +54,8 @@ module "vpc" {
   owners       = local.owners
   vpc_cidr     = local.vpc_params.vpc_cidr
 
+#  region = var.region
+
   availability_zones = data.aws_availability_zones.available.names
 
   public_subnets   = [module.subnet_addrs.network_cidr_blocks["public-1"], module.subnet_addrs.network_cidr_blocks["public-2"]]

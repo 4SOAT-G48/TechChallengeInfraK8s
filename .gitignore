@@ -34,7 +34,8 @@ override.tf.json
 terraform.rc
 
 
-
+# Ignore arquives for plan terraform
+/environments/*/*.out
 
 
 # AWS
