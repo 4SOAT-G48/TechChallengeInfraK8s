@@ -15,11 +15,23 @@ module "vpc" {
   intra_subnets    = var.intra_subnets
   database_subnets = var.database_subnets
 
+  default_security_group_name = "${local.vpc_name}-default"
+
   create_igw              = true
   enable_nat_gateway      = var.enable_nat_gateway
   map_public_ip_on_launch = true
 
   enable_flow_log = var.enable_flow_log
+}
+
+# create db subnet group
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name       = "${local.vpc_name}-db-subnet-group"
+  subnet_ids = module.vpc.database_subnets
+
+  tags = {
+    Name = "${local.vpc_name}-db-subnet-group"
+  }
 }
 
 
@@ -73,14 +85,5 @@ module "endpoints" {
       subnet_ids          = module.vpc.private_subnets
       tags                = { Name = "${local.vpc_name}-ecr-dkr-ep" }
     }
-#  ,
-#    rds = {
-#      service             = "com.amazonaws.${var.region}.rds"
-#      service_type        = "Interface"
-#      private_dns_enabled = true
-#      subnet_ids          = module.vpc.database_subnets
-#      route_table_ids     = flatten([module.vpc.database_route_table_ids, module.vpc.private_route_table_ids])
-#      tags                = { Name = "${local.vpc_name}-rds-ep" }
-#    }
   }
 }
