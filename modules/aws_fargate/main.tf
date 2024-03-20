@@ -36,8 +36,8 @@ module "eks" {
   }
 
   fargate_profiles = {
-    example = {
-      name = "example"
+    fiap = {
+      name = "fiap"
       selectors = [
         {
           namespace = "backend"

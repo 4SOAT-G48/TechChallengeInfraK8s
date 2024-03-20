@@ -9,7 +9,7 @@ resource "aws_lb" "this" {
 
 resource "aws_lb_target_group" "this" {
   name        = "${var.env_name}ALB-TG"
-  port        = 80
+  port        = 8081
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "this" {
     interval            = "30"
     protocol            = "HTTP"
     matcher             = "200,301,302"
-    path                = "/"
+    path                = "/health"
     timeout             = "5"
     unhealthy_threshold = "5"
   }
@@ -45,7 +45,7 @@ resource "aws_security_group" "alb" {
   ingress {
     protocol    = "tcp"
     from_port   = 80
-    to_port     = 80 # Atualizado para a porta de destino desejada
+    to_port     = var.container_port
     cidr_blocks = ["0.0.0.0/0"]
   }
 

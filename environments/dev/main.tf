@@ -54,7 +54,7 @@ module "vpc" {
   owners       = local.owners
   vpc_cidr     = local.vpc_params.vpc_cidr
 
-#  region = var.region
+  #  region = var.region
 
   availability_zones = data.aws_availability_zones.available.names
 
